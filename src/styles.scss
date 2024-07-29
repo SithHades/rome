@@ -1,1 +1,80 @@
 /* You can add global styles to this file, and also import other style files */
+$primary-color: #3498db;
+        $secondary-color: #2c3e50;
+        $text-color: #333;
+        $background-color: #ecf0f1;
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: $background-color;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .frame {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .header {
+            background-color: $primary-color;
+            color: white;
+            padding: 20px;
+            text-align: center;
+
+            h1 {
+                margin: 0;
+                font-size: 2em;
+            }
+        }
+
+        .content {
+            padding: 20px;
+
+            .subtitle {
+                font-size: 0.9em;
+                color: $secondary-color;
+                margin-bottom: 20px;
+                text-align: center;
+                line-height: 1.4;
+            }
+        }
+
+        /* Placeholder styles for the Angular component */
+        .upload-component {
+            border: 2px dashed $primary-color;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+
+            input[type="password"],
+            input[type="file"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+            }
+
+            button {
+                background-color: $primary-color;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+
+                &:hover {
+                    background-color: darken($primary-color, 10%);
+                }
+            }
+        }
