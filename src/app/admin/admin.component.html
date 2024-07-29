@@ -1,0 +1,24 @@
+<div class="admin-component">
+    @if (!authenticated) {
+        <div>
+            <h2>Admin Login</h2>
+            <input type="password" [(ngModel)]="password" placeholder="Enter admin password">
+            <button (click)="authenticate()">Login</button>
+        </div>
+    }
+    @if (authenticated) {
+        <div>
+            <h2>Uploaded Files</h2>
+            <ul>
+                @for (file of files; track $index) {
+                    <li>
+                        {{ file.name }} - 
+                        <button (click)="downloadFile(file.$id)">Download</button>
+                    </li>
+                }
+            </ul>
+          </div>
+    }
+</div>
+
+  

@@ -1,80 +1,154 @@
-/* You can add global styles to this file, and also import other style files */
-$primary-color: #3498db;
-        $secondary-color: #2c3e50;
-        $text-color: #333;
-        $background-color: #ecf0f1;
+/* Global Styles */
+@import url(https://fonts.bunny.net/css?family=roboto:300,400,700);
 
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: $background-color;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+$primary-color: #D5544F;
+$secondary-color: #2c3e50;
+$background-color: #ecf0f1;
+$text-color: #333;
+$error-color: #e74c3c;
+$success-color: #2ecc71;
 
-        .frame {
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            width: 90%;
-            max-width: 600px;
-        }
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
 
-        .header {
-            background-color: $primary-color;
-            color: white;
-            padding: 20px;
-            text-align: center;
+.frame {
+  max-width: 800px;
+  margin: 2rem auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
 
-            h1 {
-                margin: 0;
-                font-size: 2em;
-            }
-        }
+.header {
+  background-color: $primary-color;
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
 
-        .content {
-            padding: 20px;
+  h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+  }
+}
 
-            .subtitle {
-                font-size: 0.9em;
-                color: $secondary-color;
-                margin-bottom: 20px;
-                text-align: center;
-                line-height: 1.4;
-            }
-        }
+nav {
+  background-color: $secondary-color;
+  padding: 1rem;
+  text-align: center;
 
-        /* Placeholder styles for the Angular component */
-        .upload-component {
-            border: 2px dashed $primary-color;
-            border-radius: 5px;
-            padding: 20px;
-            text-align: center;
+  a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
 
-            input[type="password"],
-            input[type="file"] {
-                width: 100%;
-                padding: 10px;
-                margin-bottom: 10px;
-                border: 1px solid #ddd;
-                border-radius: 4px;
-            }
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
 
-            button {
-                background-color: $primary-color;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 4px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
+.content {
+  padding: 2rem;
+}
 
-                &:hover {
-                    background-color: darken($primary-color, 10%);
-                }
-            }
-        }
+/* Component Styles */
+.subtitle {
+  font-size: 1rem;
+  color: $secondary-color;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.upload-component,
+.admin-component {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  color: $primary-color;
+  margin-bottom: 1rem;
+}
+
+input[type="password"],
+input[type="file"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  padding: 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    background-color: $success-color;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+
+    &:hover {
+      background-color: darken($success-color, 10%);
+    }
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .frame {
+    margin: 1rem;
+  }
+
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .upload-component,
+  .admin-component {
+    padding: 1rem;
+  }
+}

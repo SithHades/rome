@@ -1,15 +1,18 @@
-@if (!authenticated) {
-  <div>
-    <h2>Enter Password</h2>
-    <input type="password" [(ngModel)]="password">
-    <button (click)="authenticate()">Submit</button>
-  </div>
-}
+<p class="subtitle">Diese Seite ist nur für private Zwecke. Durch upload bestätige Ich, die Rechte an den Inhalten zu haben und keine illegalen Inhalte hochzuladen.</p>
+
+<div class="upload-component">
+  @if (!authenticated) {
+    <div>
+      <h2>Enter Password</h2>
+      <input type="password" [(ngModel)]="password">
+      <button (click)="authenticate()">Submit</button>
+    </div>
+  }
   @if (authenticated) {
     <div>
       <h2>Upload Files</h2>
       <input type="file" (change)="onFileSelected($event)" multiple>
       <button (click)="uploadFiles()">Upload</button>
     </div>
-  }
-  
+  } 
+</div>
