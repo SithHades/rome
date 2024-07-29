@@ -58,8 +58,9 @@ export class ProtectedUploadComponent implements OnInit {
 
   login() {
     this.account.createEmailPasswordSession(this.email, this.password).then(
-      () => {
+      (session) => {
         this.authenticated = true;
+        this.uid = session.userId;
         this.email = '';
         this.password = '';
       },
