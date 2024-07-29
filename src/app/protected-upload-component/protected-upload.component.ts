@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { Account, Client, Storage } from 'appwrite';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-protected-upload-component',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, RouterModule],
   templateUrl: './protected-upload.component.html',
   styleUrl: './protected-upload.component.scss'
 })
@@ -15,7 +16,11 @@ export class ProtectedUploadComponent implements OnInit {
   storage: Storage;
   account: Account;
   authenticated = false;
+  showLogin = false;
+  email = '';
   password = '';
+  uid = '';
+  participationpw = '';
   selectedFiles: File[] = [];
 
   constructor() {
@@ -27,22 +32,49 @@ export class ProtectedUploadComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Check if user is already authenticated
+    this.checkSession();
+  }
+
+  checkSession() {
     this.account.get().then(
-      () => this.authenticated = true,
+      (user) => {
+        this.uid = user.$id;
+        this.authenticated = true;
+      },
       () => this.authenticated = false
     );
   }
 
-  authenticate() {
-    if (this.password === '10yearsAVE') {
-      this.account.createAnonymousSession().then(
-        () => this.authenticated = true,
-        error => console.error('Authentication failed', error)
-      );
-    } else {
-      alert('Incorrect password');
+  register() {
+    if (this.participationpw !== "10yearsAVE") {
+      alert('Nicht zur Teilnahme berechtigt.');
+      return;
     }
+    this.account.create('unique()', this.email, this.password).then(
+      () => this.login(),
+      error => alert('Registrierung fehlgeschlagen.')
+    );
+  }
+
+  login() {
+    this.account.createEmailPasswordSession(this.email, this.password).then(
+      () => {
+        this.authenticated = true;
+        this.email = '';
+        this.password = '';
+      },
+      error => alert('Login fehlgeschlagen.')
+    );
+  }
+
+  logout() {
+    this.account.deleteSession('current').then(
+      () => {
+        this.authenticated = false;
+        this.showLogin = false;
+      },
+      error => console.error('Logout failed', error)
+    );
   }
 
   onFileSelected(event: any) {
@@ -51,11 +83,14 @@ export class ProtectedUploadComponent implements OnInit {
 
   uploadFiles() {
     this.selectedFiles.forEach(file => {
-      const id = uuidv4()
+      const id = this.uid + '____' + uuidv4().split('-')[0] + uuidv4().split('-')[1];
       this.storage.createFile('66a7c3710011f4767257', id, file).then(
-        response => console.log('File uploaded successfully', response),
+        response => {
+          alert('Datei erfolgreich hochgeladen.');
+        },
         error => console.error('File upload failed', error)
       );
     });
+    this.selectedFiles = [];
   }
 }

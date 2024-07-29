@@ -1,18 +1,31 @@
-<p class="subtitle">Diese Seite ist nur für private Zwecke. Durch upload bestätige Ich, die Rechte an den Inhalten zu haben und keine illegalen Inhalte hochzuladen.</p>
-
 <div class="upload-component">
   @if (!authenticated) {
-    <div>
-      <h2>Enter Password</h2>
-      <input type="password" [(ngModel)]="password">
-      <button (click)="authenticate()">Submit</button>
-    </div>
+    
+    @if (!showLogin) {
+      <div>
+        <h2>Registrieren</h2>
+        <input type="email" [(ngModel)]="email" placeholder="Email">
+        <input type="password" [(ngModel)]="password" placeholder="Passwort">
+        <input type="password" [(ngModel)]="participationpw" placeholder="Teilnahmepasswort">
+        <button (click)="register()">Registrieren</button>
+        <p>Du hast schon einen Account? <a (click)="showLogin = true">Login</a></p>
+      </div>
+    }
+    @if (showLogin) {
+      <div>
+        <h2>Login</h2>
+        <input type="email" [(ngModel)]="email" placeholder="Email">
+        <input type="password" [(ngModel)]="password" placeholder="Passwort">
+        <button (click)="login()">Login</button>
+        <p>Noch keinen Account? <a (click)="showLogin = false">Registrieren</a></p>
+      </div>
+    }
   }
   @if (authenticated) {
-    <div>
-      <h2>Upload Files</h2>
-      <input type="file" (change)="onFileSelected($event)" multiple>
-      <button (click)="uploadFiles()">Upload</button>
-    </div>
+    <h2>Upload Files</h2>
+    <p class="subtitle">Durch upload bestätige Ich, die <a routerLink="/nutzungsbedingungen">Nutzungsbedingungen</a> zu akzeptieren.</p>
+    <input type="file" (change)="onFileSelected($event)" multiple>
+    <button (click)="uploadFiles()">Upload</button>
+    <button (click)="logout()">Logout</button>
   } 
 </div>
